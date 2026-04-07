@@ -144,6 +144,12 @@ const Home = () => {
       variants={fadeUp}
       className="w-full"
     >
+
+{/* TEST */}
+  <div style={{ color: "red", fontSize: "40px" }}>
+    TEST UPDATE VERCEL
+  </div>
+
       <iframe
         src="https://emb.fouita.com/widget/0x420058/ftdnfaudij"
         title="Instagram Feed"
