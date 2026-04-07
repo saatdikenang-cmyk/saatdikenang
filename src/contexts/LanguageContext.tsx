@@ -82,7 +82,7 @@ const translations: Record<string, Record<Language, string>> = {
   'book.subtitle': { en: 'Let\'s discuss how we can capture your timeless moments.', id: 'Mari diskusikan bagaimana kami dapat mengabadikan momen abadi Anda.' },
 
   // Footer
-  'footer.tagline': { en: 'Capturing timeless moments with cinematic clarity and trust.', id: 'Mengabadikan momen abadi dengan kejelasan sinematik dan kepercayaan.' },
+  'footer.tagline': { en: 'Framed and Filmed Your Beautiful Moment With Us.', id: 'Bingkai dan rekam setiap momen indahmu bersama kami.' },
   'footer.rights': { en: 'All rights reserved.', id: 'Hak cipta dilindungi.' },
 
   // CTA

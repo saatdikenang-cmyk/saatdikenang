@@ -110,7 +110,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
             {/* Brand */}
             <div className="md:col-span-5 space-y-6">
-              <img src={logoDark} alt="Saat Dikenang" className="h-10 w-auto" />
+              <img src={logoDark} alt="Saat Dikenang" className="h-3 w-auto" />
               <p className="text-muted-foreground font-body text-sm leading-relaxed max-w-sm">
                 {t('footer.tagline')}
               </p>
