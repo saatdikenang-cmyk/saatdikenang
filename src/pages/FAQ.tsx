@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -9,7 +12,7 @@ const fadeUp = {
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
 const FAQ = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const faqs = [
     { q: t('faq.q1'), a: t('faq.a1') },
@@ -24,20 +27,39 @@ const FAQ = () => {
       <section className="py-20 px-6">
         <div className="container mx-auto max-w-3xl">
           <motion.div className="text-center mb-20" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.p variants={fadeUp} className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">FAQ</motion.p>
+            <motion.p variants={fadeUp} className="font-body text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-4">FAQ</motion.p>
             <motion.h1 variants={fadeUp} className="font-display text-4xl md:text-5xl font-light">{t('faq.title')}</motion.h1>
+            <motion.div variants={fadeUp} className="editorial-divider mt-8" />
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <Accordion type="single" collapsible className="space-y-4">
+            <Accordion type="single" collapsible className="space-y-3">
               {faqs.map((faq, i) => (
                 <motion.div key={i} variants={fadeUp}>
-                  <AccordionItem value={`faq-${i}`} className="border border-border px-6">
+                  <AccordionItem value={`faq-${i}`} className="border border-border px-8 py-1 hover:border-foreground/20 transition-colors duration-300">
                     <AccordionTrigger className="font-display text-lg font-light hover:no-underline">{faq.q}</AccordionTrigger>
                     <AccordionContent className="font-body text-sm text-muted-foreground leading-relaxed">{faq.a}</AccordionContent>
                   </AccordionItem>
                 </motion.div>
               ))}
             </Accordion>
+          </motion.div>
+
+          {/* CTA below FAQ */}
+          <motion.div
+            className="text-center mt-20 pt-16 border-t border-border"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <p className="font-display text-2xl font-light mb-6">
+              {lang === 'en' ? 'Still have questions?' : 'Masih punya pertanyaan?'}
+            </p>
+            <Link to="/book">
+              <Button variant="hero-outline" size="lg" className="gap-3">
+                {lang === 'en' ? 'Get in Touch' : 'Hubungi Kami'} <ArrowRight size={14} />
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </section>
