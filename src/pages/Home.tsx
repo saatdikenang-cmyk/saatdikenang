@@ -56,10 +56,9 @@ const Home = () => {
     animate="visible"
     variants={stagger}
   >
-          <motion.h1 variants={fadeUp} className="font-RelationshipOfMelodrame text-4xl md:text-6xl lg:text-7xl font-light text-background leading-[1.1] mb-8 tracking-tight">
+          {/* <motion.h1 variants={fadeUp} className="font-RelationshipOfMelodrame text-4xl md:text-6xl lg:text-7xl font-light text-background leading-[1.1] mb-8 tracking-tight">
             {t('hero.tagline')}
-          </motion.h1>
-          {/* <motion.div variants={fadeUp} className="editorial-divider mb-8 bg-background/40" /> */}
+          </motion.h1> */}
           <motion.p variants={fadeUp} className="font-body text-sm md:text-base text-background/60 max-w-xl mx-auto mb-12 leading-relaxed">
             {t('hero.subtitle')}
           </motion.p>
