@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import logoDark from '@/assets/logo-dark.png';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -9,7 +10,7 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="space-y-4">
-            <h3 className="font-display text-2xl tracking-tight">Saat Dikenang</h3>
+            <img src={logoDark} alt="Saat Dikenang" className="h-12 w-auto mb-2" />
             <p className="text-muted-foreground font-body text-sm leading-relaxed max-w-xs">
               {t('footer.tagline')}
             </p>
