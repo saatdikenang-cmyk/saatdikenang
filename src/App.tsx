@@ -1,5 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import ScrollToTop from "./components/ScrollToTop"; // 👈 TAMBAHKAN INI
+
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,7 +15,6 @@ import Pricing from "./pages/Pricing";
 import Portfolio from "./pages/Portfolio";
 import Process from "./pages/Process";
 import FAQ from "./pages/FAQ";
-import Blog from "./pages/Blog";
 import Book from "./pages/Book";
 import NotFound from "./pages/NotFound";
 
@@ -23,23 +25,30 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+
       <BrowserRouter>
         <LanguageProvider>
+
+          <ScrollToTop /> {/* 🔥 WAJIB: reset scroll */}
+
           <Navbar />
+
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/process" element={<Process />} />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/blog" element={<Blog />} />
             <Route path="/book" element={<Book />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+
           <Footer />
           <WhatsAppButton />
+
         </LanguageProvider>
       </BrowserRouter>
+
     </TooltipProvider>
   </QueryClientProvider>
 );

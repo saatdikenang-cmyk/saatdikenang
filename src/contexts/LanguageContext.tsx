@@ -19,7 +19,7 @@ const translations: Record<string, Record<Language, string>> = {
   'nav.book': { en: 'Book a Call', id: 'Jadwalkan Panggilan' },
 
   // Hero
-  'hero.tagline': { en: 'Framed and Filmed Your Beautiful Moment', id: 'Mengabadikan Momen Indahmu' },
+  'hero.tagline': { en: 'Saat Dikenang', id: 'Saat Dikenang' },
   'hero.subtitle': { en: 'Premium photography & videography for timeless moments. We capture clarity, trust, and cinematic beauty in every frame.', id: 'Fotografi & videografi premium untuk momen abadi. Kami menangkap kejelasan, kepercayaan, dan keindahan sinematik di setiap frame.' },
   'hero.cta': { en: 'Book via WhatsApp', id: 'Pesan via WhatsApp' },
   'hero.cta2': { en: 'View Portfolio', id: 'Lihat Portofolio' },

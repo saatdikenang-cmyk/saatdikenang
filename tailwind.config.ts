@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 
 export default {
@@ -16,6 +17,7 @@ export default {
       fontFamily: {
         display: ["'Cormorant Garamond'", "serif"],
         body: ["'Space Grotesk'", "sans-serif"],
+        RelationshipOfMelodrame: ["RelationshipOfMelodrame", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

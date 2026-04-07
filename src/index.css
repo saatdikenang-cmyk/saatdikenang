@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Melodrame';
+  src: url('/fonts/RelationshipOfMelodrame.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @layer base {
   :root {
     --background: 40 20% 98%;
