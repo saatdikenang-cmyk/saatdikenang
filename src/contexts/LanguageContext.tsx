@@ -11,7 +11,7 @@ interface LanguageContextType {
 const translations: Record<string, Record<Language, string>> = {
   // Nav
   'nav.home': { en: 'Home', id: 'Beranda' },
-  'nav.pricing': { en: 'Pricing', id: 'Harga' },
+  'nav.pricing': { en: 'Packages', id: 'Paket' },
   'nav.portfolio': { en: 'Portfolio', id: 'Portofolio' },
   'nav.process': { en: 'Our Process', id: 'Proses Kami' },
   'nav.faq': { en: 'FAQ', id: 'FAQ' },

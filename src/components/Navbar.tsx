@@ -43,7 +43,7 @@ const Navbar = () => {
           <img
             src={transparent ? logoWhite : logoDark}
             alt="Saat Dikenang"
-            className="h-8 w-auto transition-opacity duration-300"
+            className="h-5 w-auto transition-opacity duration-300"
           />
         </Link>
 
