@@ -61,11 +61,7 @@ const Home = () => {
             <a href={waUrl} target="_blank" rel="noopener noreferrer">
               <Button variant="hero" size="xl">{t('hero.cta')}</Button>
             </a>
-            <Link to="/portfolio">
-              <Button variant="hero-outline" size="xl" className="border-background/30 text-background hover:bg-background hover:text-foreground">
-                {t('hero.cta2')}
-              </Button>
-            </Link>
+            
           </motion.div>
         </motion.div>
 
@@ -144,12 +140,7 @@ const Home = () => {
       variants={fadeUp}
       className="w-full"
     >
-
-{/* TEST */}
-  <div style={{ color: "red", fontSize: "40px" }}>
-    TEST UPDATE VERCEL
-  </div>
-
+      
       <iframe
         src="https://emb.fouita.com/widget/0x420058/ftdnfaudij"
         title="Instagram Feed"
@@ -157,21 +148,6 @@ const Home = () => {
         height="600"
         className="rounded-2xl border-0"
       ></iframe>
-    </motion.div>
-
-    {/* Button */}
-    <motion.div
-      className="text-center mt-16"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={fadeUp}
-    >
-      <Link to="/portfolio">
-        <Button variant="outline" size="lg" className="gap-3">
-          {lang === 'en' ? 'View Full Portfolio' : 'Lihat Portofolio Lengkap'} <ArrowRight size={14} />
-        </Button>
-      </Link>
     </motion.div>
 
   </div>

@@ -24,7 +24,6 @@ const Navbar = () => {
   const links = [
     { to: '/', label: t('nav.home') },
     { to: '/pricing', label: t('nav.pricing') },
-    { to: '/portfolio', label: t('nav.portfolio') },
     { to: '/process', label: t('nav.process') },
     { to: '/faq', label: t('nav.faq') },
   ];

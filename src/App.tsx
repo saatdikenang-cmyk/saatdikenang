@@ -12,7 +12,6 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Home from "./pages/Home";
 import Pricing from "./pages/Pricing";
-import Portfolio from "./pages/Portfolio";
 import Process from "./pages/Process";
 import FAQ from "./pages/FAQ";
 import Book from "./pages/Book";
@@ -36,7 +35,6 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/process" element={<Process />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/book" element={<Book />} />
