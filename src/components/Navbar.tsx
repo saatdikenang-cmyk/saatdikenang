@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Menu, X } from 'lucide-react';
+import logoDark from '@/assets/logo-dark.png';
 
 const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
