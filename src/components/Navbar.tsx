@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Menu, X } from 'lucide-react';
 import logoDark from '@/assets/logo-dark.png';
+import logoWhite from '@/assets/logo-white.png';
 
 const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  const isHome = location.pathname === '/';
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const transparent = isHome && !scrolled && !open;
 
   const links = [
     { to: '/', label: t('nav.home') },
@@ -21,10 +33,20 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
-      <nav className="container mx-auto flex items-center justify-between h-16 px-6">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        transparent
+          ? 'bg-transparent border-b border-transparent'
+          : 'bg-background/90 backdrop-blur-md border-b border-border/50'
+      }`}
+    >
+      <nav className="container mx-auto flex items-center justify-between h-18 px-6 py-4">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logoDark} alt="Saat Dikenang" className="h-8 w-auto" />
+          <img
+            src={transparent ? logoWhite : logoDark}
+            alt="Saat Dikenang"
+            className="h-8 w-auto transition-opacity duration-300"
+          />
         </Link>
 
         {/* Desktop nav */}
@@ -33,8 +55,12 @@ const Navbar = () => {
             <Link
               key={link.to}
               to={link.to}
-              className={`font-body text-xs tracking-wider uppercase transition-colors duration-300 ${
-                isActive(link.to) ? 'text-accent' : 'text-muted-foreground hover:text-foreground'
+              className={`font-body text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 ${
+                isActive(link.to)
+                  ? 'text-accent'
+                  : transparent
+                  ? 'text-background/70 hover:text-background'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               {link.label}
@@ -42,36 +68,38 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-5">
           <button
             onClick={() => setLang(lang === 'en' ? 'id' : 'en')}
-            className="font-body text-xs tracking-wider uppercase text-muted-foreground hover:text-foreground transition-colors"
+            className={`font-body text-[11px] tracking-[0.15em] uppercase transition-colors duration-300 ${
+              transparent ? 'text-background/60 hover:text-background' : 'text-muted-foreground hover:text-foreground'
+            }`}
           >
             {lang === 'en' ? 'ID' : 'EN'}
           </button>
           <Link
             to="/book"
-            className="bg-accent text-accent-foreground px-5 py-2 font-body text-xs tracking-wider uppercase hover:bg-accent/90 transition-all duration-300"
+            className="bg-accent text-accent-foreground px-6 py-2.5 font-body text-[11px] tracking-[0.15em] uppercase hover:bg-accent/90 transition-all duration-300"
           >
             {t('nav.book')}
           </Link>
         </div>
 
         {/* Mobile */}
-        <button onClick={() => setOpen(!open)} className="lg:hidden text-foreground">
-          {open ? <X size={20} /> : <Menu size={20} />}
+        <button onClick={() => setOpen(!open)} className={`lg:hidden ${transparent ? 'text-background' : 'text-foreground'}`}>
+          {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
 
       {/* Mobile menu */}
       {open && (
-        <div className="lg:hidden bg-background border-b border-border px-6 pb-6 space-y-4">
+        <div className="lg:hidden bg-background border-b border-border px-6 pb-8 pt-2 space-y-4 animate-fade-in">
           {links.map((link) => (
             <Link
               key={link.to}
               to={link.to}
               onClick={() => setOpen(false)}
-              className={`block font-body text-sm tracking-wider ${
+              className={`block font-body text-sm tracking-wider py-1 ${
                 isActive(link.to) ? 'text-accent' : 'text-muted-foreground'
               }`}
             >

@@ -6,32 +6,32 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 40 20% 98%;
     --foreground: 0 0% 5%;
 
-    --card: 0 0% 98%;
+    --card: 40 15% 96%;
     --card-foreground: 0 0% 5%;
 
-    --popover: 0 0% 100%;
+    --popover: 40 20% 98%;
     --popover-foreground: 0 0% 5%;
 
     --primary: 0 0% 8%;
-    --primary-foreground: 0 0% 98%;
+    --primary-foreground: 40 20% 98%;
 
-    --secondary: 40 10% 95%;
+    --secondary: 40 10% 93%;
     --secondary-foreground: 0 0% 8%;
 
-    --muted: 40 8% 94%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 40 8% 92%;
+    --muted-foreground: 0 0% 42%;
 
     --accent: 100 22% 36%;
-    --accent-foreground: 0 0% 98%;
+    --accent-foreground: 40 20% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
+    --border: 40 10% 88%;
+    --input: 40 10% 88%;
     --ring: 100 22% 36%;
 
     --radius: 0.25rem;
@@ -50,22 +50,22 @@
   }
 
   .dark {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 0 0% 95%;
-    --primary-foreground: 0 0% 5%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
+    --background: 0 0% 4%;
+    --foreground: 40 20% 95%;
+    --card: 0 0% 7%;
+    --card-foreground: 40 20% 95%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 40 20% 95%;
+    --primary: 40 20% 95%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 11%;
+    --secondary-foreground: 40 20% 95%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 58%;
     --accent: 100 22% 45%;
-    --accent-foreground: 0 0% 98%;
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
+    --accent-foreground: 40 20% 98%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
     --ring: 100 22% 45%;
   }
 }
@@ -100,6 +100,34 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Subtle film grain texture overlay */
+.grain-overlay::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Horizontal rule — editorial divider */
+.editorial-divider {
+  @apply w-12 h-px bg-accent mx-auto;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
 /* Cinematic section transitions */
 .section-fade {
   opacity: 0;
@@ -110,4 +138,9 @@ html {
 .section-fade.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Lightbox overlay */
+.lightbox-overlay {
+  @apply fixed inset-0 z-[90] bg-foreground/90 backdrop-blur-sm flex items-center justify-center cursor-zoom-out;
 }
