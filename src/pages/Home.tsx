@@ -117,58 +117,59 @@ const Home = () => {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-32 px-6 bg-card">
-        <div className="container mx-auto max-w-6xl">
-          <motion.div
-            className="text-center mb-20"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            <motion.p variants={fadeUp} className="font-body text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-4">
-              {t('portfolio.title')}
-            </motion.p>
-            <motion.h2 variants={fadeUp} className="font-display text-4xl md:text-5xl font-light">
-              {t('portfolio.subtitle')}
-            </motion.h2>
-          </motion.div>
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-3"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {[portfolio1, portfolio2, portfolio3, portfolio4].map((img, i) => (
-              <motion.div key={i} variants={fadeUp} className="overflow-hidden group relative">
-                <img
-                  src={img}
-                  alt={`Portfolio work ${i + 1}`}
-                  className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                  width={800}
-                  height={600}
-                />
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors duration-500" />
-              </motion.div>
-            ))}
-          </motion.div>
-          <motion.div
-            className="text-center mt-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <Link to="/portfolio">
-              <Button variant="outline" size="lg" className="gap-3">
-                {lang === 'en' ? 'View Full Portfolio' : 'Lihat Portofolio Lengkap'} <ArrowRight size={14} />
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+<section className="py-32 px-6 bg-card">
+  <div className="container mx-auto max-w-6xl">
+    
+    {/* Title */}
+    <motion.div
+      className="text-center mb-20"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={stagger}
+    >
+      <motion.p variants={fadeUp} className="font-body text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-4">
+        {t('portfolio.title')}
+      </motion.p>
+      <motion.h2 variants={fadeUp} className="font-display text-4xl md:text-5xl font-light">
+        {t('portfolio.subtitle')}
+      </motion.h2>
+    </motion.div>
+
+    {/* IG FEED */}
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={fadeUp}
+      className="w-full"
+    >
+      <iframe
+        src="https://emb.fouita.com/widget/0x420058/ftdnfaudij"
+        title="Instagram Feed"
+        width="100%"
+        height="600"
+        className="rounded-2xl border-0"
+      ></iframe>
+    </motion.div>
+
+    {/* Button */}
+    <motion.div
+      className="text-center mt-16"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={fadeUp}
+    >
+      <Link to="/portfolio">
+        <Button variant="outline" size="lg" className="gap-3">
+          {lang === 'en' ? 'View Full Portfolio' : 'Lihat Portofolio Lengkap'} <ArrowRight size={14} />
+        </Button>
+      </Link>
+    </motion.div>
+
+  </div>
+</section>
 
 
 
