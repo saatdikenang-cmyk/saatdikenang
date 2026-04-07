@@ -134,7 +134,7 @@ const Home = () => {
                 <img
                   src={img}
                   alt={`Portfolio work ${i + 1}`}
-                  className="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                   width={800}
                   height={1000}
