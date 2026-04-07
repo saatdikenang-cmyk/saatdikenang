@@ -4,6 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Camera, Film, ArrowRight } from 'lucide-react';
 import heroImg from '@/assets/hero-1.jpg';
+import logoWhite from '@/assets/logo-white.png';
 import portfolio1 from '@/assets/portfolio-1.jpg';
 import portfolio2 from '@/assets/portfolio-2.jpg';
 import portfolio3 from '@/assets/portfolio-3.jpg';
@@ -40,9 +41,9 @@ const Home = () => {
           animate="visible"
           variants={stagger}
         >
-          <motion.p variants={fadeUp} className="font-body text-xs tracking-[0.3em] uppercase text-background/70 mb-6">
-            Saat Dikenang
-          </motion.p>
+          <motion.div variants={fadeUp} className="flex justify-center mb-6">
+            <img src={logoWhite} alt="Saat Dikenang" className="h-16 w-auto" />
+          </motion.div>
           <motion.h1 variants={fadeUp} className="font-display text-4xl md:text-6xl lg:text-7xl font-light text-background leading-tight mb-8">
             {t('hero.tagline')}
           </motion.h1>
