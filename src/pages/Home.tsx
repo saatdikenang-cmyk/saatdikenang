@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { Camera, Film, ArrowRight } from 'lucide-react';
+import { Camera, Film, ArrowRight, Star } from 'lucide-react';
+import { useRef } from 'react';
 import heroImg from '@/assets/hero-1.jpg';
 import logoWhite from '@/assets/logo-white.png';
 import portfolio1 from '@/assets/portfolio-1.jpg';
@@ -21,33 +22,64 @@ const stagger = {
 
 const Home = () => {
   const { t, lang } = useLanguage();
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const waMessage = lang === 'en'
     ? 'Hi Saat Dikenang! I\'m interested in your services. Could you share more details?'
     : 'Halo Saat Dikenang! Saya tertarik dengan layanan Anda. Bisa berbagi detail lebih lanjut?';
   const waUrl = `https://wa.me/6285173032882?text=${encodeURIComponent(waMessage)}`;
 
+  const marqueeText = lang === 'en'
+    ? 'TIMELESS · CINEMATIC · CLARITY · TRUST · AUTHORITY · PREMIUM · '
+    : 'ABADI · SINEMATIK · KEJELASAN · KEPERCAYAAN · OTORITAS · PREMIUM · ';
+
+  const testimonials = [
+    {
+      name: 'Andini R.',
+      text: lang === 'en'
+        ? 'The photos captured my graduation day exactly as I dreamed. Every detail was perfect.'
+        : 'Fotonya menangkap hari wisuda saya persis seperti yang saya impikan. Setiap detail sempurna.',
+    },
+    {
+      name: 'Faisal M.',
+      text: lang === 'en'
+        ? 'Truly cinematic. The video made me relive the moment over and over again.'
+        : 'Benar-benar sinematik. Videonya membuat saya menghidupkan kembali momen itu berulang kali.',
+    },
+    {
+      name: 'Sarah K.',
+      text: lang === 'en'
+        ? 'Professional, punctual, and the results exceeded all expectations. Highly recommended.'
+        : 'Profesional, tepat waktu, dan hasilnya melampaui semua ekspektasi. Sangat direkomendasikan.',
+    },
+  ];
+
   return (
-    <main>
+    <main className="grain-overlay">
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
+      <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
+        <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
           <img src={heroImg} alt="Cinematic graduation photography" className="w-full h-full object-cover" width={1920} height={1080} />
-          <div className="absolute inset-0 bg-foreground/50" />
-        </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/50 to-foreground/70" />
+        </motion.div>
         <motion.div
           className="relative z-10 text-center px-6 max-w-4xl mx-auto"
+          style={{ opacity: heroOpacity }}
           initial="hidden"
           animate="visible"
           variants={stagger}
         >
-          <motion.div variants={fadeUp} className="flex justify-center mb-6">
-            <img src={logoWhite} alt="Saat Dikenang" className="h-16 w-auto" />
+          <motion.div variants={fadeUp} className="flex justify-center mb-8">
+            <img src={logoWhite} alt="Saat Dikenang" className="h-14 md:h-20 w-auto" />
           </motion.div>
-          <motion.h1 variants={fadeUp} className="font-display text-4xl md:text-6xl lg:text-7xl font-light text-background leading-tight mb-8">
+          <motion.h1 variants={fadeUp} className="font-display text-4xl md:text-6xl lg:text-7xl font-light text-background leading-[1.1] mb-8 tracking-tight">
             {t('hero.tagline')}
           </motion.h1>
-          <motion.p variants={fadeUp} className="font-body text-sm md:text-base text-background/70 max-w-2xl mx-auto mb-12 leading-relaxed">
+          <motion.div variants={fadeUp} className="editorial-divider mb-8 bg-background/40" />
+          <motion.p variants={fadeUp} className="font-body text-sm md:text-base text-background/60 max-w-xl mx-auto mb-12 leading-relaxed">
             {t('hero.subtitle')}
           </motion.p>
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -61,6 +93,59 @@ const Home = () => {
             </Link>
           </motion.div>
         </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+        >
+          <motion.div
+            className="w-px h-12 bg-background/30"
+            animate={{ scaleY: [0, 1, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ transformOrigin: 'top' }}
+          />
+        </motion.div>
+      </section>
+
+      {/* Marquee */}
+      <section className="py-6 border-b border-border overflow-hidden bg-background">
+        <div className="flex whitespace-nowrap">
+          <div className="animate-marquee flex items-center">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <span key={i} className="font-display text-xl md:text-2xl font-light tracking-[0.2em] text-foreground/10 mx-4">
+                {marqueeText}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="py-20 px-6 bg-background">
+        <div className="container mx-auto max-w-4xl">
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+            {[
+              { num: '200+', label: lang === 'en' ? 'Sessions' : 'Sesi' },
+              { num: '5000+', label: lang === 'en' ? 'Photos Delivered' : 'Foto Terkirim' },
+              { num: '100%', label: lang === 'en' ? 'Satisfaction' : 'Kepuasan' },
+              { num: '50+', label: lang === 'en' ? 'Videos Crafted' : 'Video Dibuat' },
+            ].map((stat) => (
+              <motion.div key={stat.label} variants={fadeUp}>
+                <p className="font-display text-3xl md:text-4xl font-light text-accent">{stat.num}</p>
+                <p className="font-body text-[11px] tracking-[0.2em] uppercase text-muted-foreground mt-2">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </section>
 
       {/* Services */}
@@ -73,7 +158,7 @@ const Home = () => {
             viewport={{ once: true }}
             variants={stagger}
           >
-            <motion.p variants={fadeUp} className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">
+            <motion.p variants={fadeUp} className="font-body text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-4">
               {t('services.title')}
             </motion.p>
             <motion.h2 variants={fadeUp} className="font-display text-4xl md:text-5xl font-light">
@@ -81,7 +166,7 @@ const Home = () => {
             </motion.h2>
           </motion.div>
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-12"
+            className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -92,12 +177,12 @@ const Home = () => {
               { icon: Film, title: t('services.video'), desc: lang === 'en' ? 'Cinematic videography that transforms moments into timeless visual narratives.' : 'Videografi sinematik yang mengubah momen menjadi narasi visual abadi.' },
               { icon: Camera, title: t('services.combo'), desc: lang === 'en' ? 'The complete experience — photo and video captured in one seamless session.' : 'Pengalaman lengkap — foto dan video ditangkap dalam satu sesi yang mulus.' },
             ].map((service) => (
-              <motion.div key={service.title} variants={fadeUp} className="text-center space-y-6 p-8">
-                <service.icon className="mx-auto text-accent" size={32} strokeWidth={1} />
+              <motion.div key={service.title} variants={fadeUp} className="bg-background text-center space-y-6 p-12 group hover:bg-card transition-colors duration-500">
+                <service.icon className="mx-auto text-accent" size={28} strokeWidth={1} />
                 <h3 className="font-display text-2xl font-light">{service.title}</h3>
                 <p className="font-body text-sm text-muted-foreground leading-relaxed">{service.desc}</p>
-                <Link to="/pricing" className="inline-flex items-center gap-2 font-body text-xs tracking-wider uppercase text-accent hover:gap-3 transition-all">
-                  {lang === 'en' ? 'View Packages' : 'Lihat Paket'} <ArrowRight size={14} />
+                <Link to="/pricing" className="inline-flex items-center gap-2 font-body text-[11px] tracking-[0.15em] uppercase text-accent hover:gap-3 transition-all duration-300">
+                  {lang === 'en' ? 'View Packages' : 'Lihat Paket'} <ArrowRight size={13} />
                 </Link>
               </motion.div>
             ))}
@@ -115,7 +200,7 @@ const Home = () => {
             viewport={{ once: true }}
             variants={stagger}
           >
-            <motion.p variants={fadeUp} className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground mb-4">
+            <motion.p variants={fadeUp} className="font-body text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-4">
               {t('portfolio.title')}
             </motion.p>
             <motion.h2 variants={fadeUp} className="font-display text-4xl md:text-5xl font-light">
@@ -123,34 +208,35 @@ const Home = () => {
             </motion.h2>
           </motion.div>
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={stagger}
           >
             {[portfolio1, portfolio2, portfolio3, portfolio4].map((img, i) => (
-              <motion.div key={i} variants={fadeUp} className="overflow-hidden group">
+              <motion.div key={i} variants={fadeUp} className="overflow-hidden group relative">
                 <img
                   src={img}
                   alt={`Portfolio work ${i + 1}`}
                   className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                   width={800}
-                  height={1000}
+                  height={600}
                 />
+                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-colors duration-500" />
               </motion.div>
             ))}
           </motion.div>
           <motion.div
-            className="text-center mt-12"
+            className="text-center mt-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
           >
             <Link to="/portfolio">
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" className="gap-3">
                 {lang === 'en' ? 'View Full Portfolio' : 'Lihat Portofolio Lengkap'} <ArrowRight size={14} />
               </Button>
             </Link>
@@ -158,19 +244,60 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Testimonials */}
       <section className="py-32 px-6">
-        <div className="container mx-auto max-w-3xl text-center">
+        <div className="container mx-auto max-w-5xl">
+          <motion.div
+            className="text-center mb-20"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+            <motion.p variants={fadeUp} className="font-body text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-4">
+              {lang === 'en' ? 'Testimonials' : 'Testimoni'}
+            </motion.p>
+            <motion.h2 variants={fadeUp} className="font-display text-4xl md:text-5xl font-light">
+              {lang === 'en' ? 'Words from our clients.' : 'Kata dari klien kami.'}
+            </motion.h2>
+          </motion.div>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+            {testimonials.map((item, i) => (
+              <motion.div key={i} variants={fadeUp} className="border border-border p-8 space-y-6">
+                <div className="flex gap-1">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <Star key={j} size={14} className="fill-accent text-accent" />
+                  ))}
+                </div>
+                <p className="font-body text-sm text-foreground/70 leading-relaxed italic">"{item.text}"</p>
+                <p className="font-body text-[11px] tracking-[0.15em] uppercase text-muted-foreground">— {item.name}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="relative py-32 px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-foreground" />
+        <div className="container mx-auto max-w-3xl text-center relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={stagger}
           >
-            <motion.h2 variants={fadeUp} className="font-display text-4xl md:text-5xl font-light mb-8">
+            <motion.h2 variants={fadeUp} className="font-display text-4xl md:text-5xl font-light mb-8 text-background">
               {lang === 'en' ? 'Ready to capture your timeless moments?' : 'Siap mengabadikan momen abadi Anda?'}
             </motion.h2>
-            <motion.p variants={fadeUp} className="font-body text-muted-foreground mb-12 leading-relaxed">
+            <motion.div variants={fadeUp} className="editorial-divider mb-8 bg-background/20" />
+            <motion.p variants={fadeUp} className="font-body text-background/50 mb-12 leading-relaxed text-sm">
               {lang === 'en'
                 ? 'Let\'s create something beautiful together. Reach out and let us craft your cinematic story.'
                 : 'Mari ciptakan sesuatu yang indah bersama. Hubungi kami dan biarkan kami membuat cerita sinematik Anda.'}
@@ -180,7 +307,9 @@ const Home = () => {
                 <Button variant="hero" size="xl">{t('cta.whatsapp')}</Button>
               </a>
               <Link to="/book">
-                <Button variant="hero-outline" size="xl">{t('cta.call')}</Button>
+                <Button variant="hero-outline" size="xl" className="border-background/20 text-background hover:bg-background hover:text-foreground">
+                  {t('cta.call')}
+                </Button>
               </Link>
             </motion.div>
           </motion.div>
