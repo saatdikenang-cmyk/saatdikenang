@@ -40,10 +40,8 @@ const Footer = () => {
                 {[
                   { path: '/', label: lang === 'en' ? 'Home' : 'Beranda' },
                   { path: '/pricing', label: lang === 'en' ? 'Pricing' : 'Harga' },
-                  { path: '/portfolio', label: lang === 'en' ? 'Portfolio' : 'Portofolio' },
                   { path: '/process', label: lang === 'en' ? 'Process' : 'Proses' },
                   { path: '/faq', label: 'FAQ' },
-                  { path: '/blog', label: lang === 'en' ? 'Journal' : 'Jurnal' },
                 ].map((item) => (
                   <Link key={item.path} to={item.path} className="block font-body text-sm text-foreground/60 hover:text-foreground transition-colors duration-300">
                     {item.label}
