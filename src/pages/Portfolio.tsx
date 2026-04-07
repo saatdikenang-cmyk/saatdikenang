@@ -39,7 +39,7 @@ const Portfolio = () => {
                 <img
                   src={img.src}
                   alt={`Portfolio ${i + 1}`}
-                  className="w-full h-72 md:h-96 object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                   width={800}
                   height={1000}
