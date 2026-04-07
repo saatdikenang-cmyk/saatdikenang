@@ -36,20 +36,26 @@ const Home = () => {
 
   return (
     <main className="grain-overlay">
-      {/* Hero */}
-      <section className="relative min-h-[120vh] flex items-start pt-[45vh] justify-center overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
-          <img src={heroImg} alt="Cinematic graduation photography" className="w-full h-full object-cover" width={1920} height={1080} />
-          <div className="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/50 to-foreground/70" />
-        </motion.div>
-        <motion.div
-          className="relative z-10 text-center px-6 max-w-4xl mx-auto"
-          style={{ opacity: heroOpacity }}
-          initial="hidden"
-          animate="visible"
-          variants={stagger}
-        >
+     {/* Hero */}
+<section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
+  <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
+    <img
+      src={heroImg}
+      alt="Cinematic graduation photography"
+      className="w-full h-full object-cover"
+      width={1920}
+      height={1080}
+    />
+    <div className="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/50 to-foreground/70" />
+  </motion.div>
 
+  <motion.div
+    className="relative z-10 text-center px-6 max-w-4xl mx-auto"
+    style={{ opacity: heroOpacity }}
+    initial="hidden"
+    animate="visible"
+    variants={stagger}
+  >
           <motion.h1 variants={fadeUp} className="font-RelationshipOfMelodrame text-4xl md:text-6xl lg:text-7xl font-light text-background leading-[1.1] mb-8 tracking-tight">
             {t('hero.tagline')}
           </motion.h1>
